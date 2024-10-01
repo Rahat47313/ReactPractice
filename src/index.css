@@ -1,0 +1,44 @@
+@import url('https://fonts.cdnfonts.com/css/menlo');
+@import url('https://fonts.cdnfonts.com/css/impact');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family: Inter, sans-serif;
+    /* background-color: black; */
+    /* background-image: url('https://static.vecteezy.com/system/resources/previews/009/408/676/non_2x/light-bulb-transparent-free-png.png');
+    background-blend-mode: luminosity;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: 30vh;
+    background-size: contain; */
+}
+
+.text-shadow{
+  text-shadow: 
+        2px 2px 0 #000,
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        0 2px 0 #000,
+        2px 0 0 #000,
+        0 -2px 0 #000,
+        -2px 0 0 #000,
+        2px 2px 5px #000;
+}
+/* svg {
+  color: #ffffff;
+  background-image: linear-gradient(
+    150deg,
+    #ff4800 13.4%,
+    #da54d8 50%,
+    #0092f4 86.6%
+  );
+} */
