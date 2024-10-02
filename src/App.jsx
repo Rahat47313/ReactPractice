@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import MainContent from "./components/MainContent";
 import Meme from "./memeGenerator/Meme";
+import { useState } from "react";
 // import Notification from "./components/notification";
 // import PricingCard from "./components/PricingCard";
 // import MobileNav from "./workComponents/MobileNav";
@@ -10,9 +11,14 @@ import Meme from "./memeGenerator/Meme";
 // import SiteSettingsGeneral from "./workComponents/SiteSettingsGeneral";
 
 function App() {
+  const [themeMode, setThemeMode] = useState(false)
+  function toggleTheme(){
+    setThemeMode(prevThemeMode => !prevThemeMode)
+  }
   return (
     <>
-      <Navbar />
+      <div className={`${themeMode ? "bg-black" : "bg-white"} absolute z-[-1] transition duration-300 w-[100vw] h-[100vh]`}>
+      <Navbar toggleTheme={toggleTheme} />
       <MainContent />
       <Meme />
       {/* <Notification /> */}
@@ -21,6 +27,7 @@ function App() {
       {/* <ShareMenuExtended /> */}
       {/* <SiteSettingsDomains />  */}
       {/* <SiteSettingsGeneral /> */}
+      </div>
     </>
   );
 }

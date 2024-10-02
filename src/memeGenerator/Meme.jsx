@@ -74,10 +74,10 @@ export default function Meme() {
       <div className="p-10">
       <div className="flex justify-center relative">
         <img src={meme.randomImg} className="w-[50%]"></img>
-        <div className="absolute text-center font-impact text-[2em] uppercase text-white tracking-[1px] text-shadow my-[15px] px-[5px] top-0">
+        <div className="absolute text-center font-impact text-[2em] uppercase text-white tracking-[1px] memeText-shadow my-[15px] px-[5px] top-0">
           {meme.topText}
         </div>
-        <div className="absolute w-[80%] text-center left-[50%] translate-x-[-50%] font-impact text-[2em] uppercase text-white tracking-[1px] text-shadow my-[15px] px-[5px] bottom-0">
+        <div className="absolute w-[80%] text-center left-[50%] translate-x-[-50%] font-impact text-[2em] uppercase text-white tracking-[1px] memeText-shadow my-[15px] px-[5px] bottom-0">
           {meme.bottomText}
         </div>
       </div>
