@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
-import MainContent from "./components/MainContent";
-import Meme from "./memeGenerator/Meme";
+// import MainContent from "./components/MainContent";
+// import Meme from "./memeGenerator/Meme";
+import NoteApp from "./markdownNote/NoteApp";
 import { useState } from "react";
 // import Notification from "./components/notification";
 // import PricingCard from "./components/PricingCard";
@@ -19,8 +20,9 @@ function App() {
     <>
       <div className={`${themeMode ? "bg-black" : "bg-white"} absolute z-[-1] transition duration-300 w-[100vw] h-[100vh]`}>
       <Navbar toggleTheme={toggleTheme} />
-      <MainContent />
-      <Meme />
+      {/* <MainContent /> */}
+      {/* <Meme /> */}
+      <NoteApp />
       {/* <Notification /> */}
       {/* <PricingCard /> */}
       {/* <Nav3 /> */}
