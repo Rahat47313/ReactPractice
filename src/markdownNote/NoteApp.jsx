@@ -1,41 +1,91 @@
 import Sidebar from "./Sidebar";
 import Editor from "./Editor";
-// import { data } from "./data"
 import Split from "react-split";
-import { nanoid } from "nanoid";
-import { useState } from "react";
+// import { nanoid } from "nanoid";
+import { useEffect, useState } from "react";
+import { addDoc, onSnapshot } from "firebase/firestore";
+import { notesCollection } from "../firebase";
 
 export default function NoteApp() {
   const [notes, setNotes] = useState([]);
-  const [currentNoteId, setCurrentNoteId] = useState(
-    (notes[0] && notes[0].id) || ""
-  );
 
-  function createNewNote() {
+  //used if stored only in localStorage
+  //     const [notes, setNotes] = useState(
+  //     () => JSON.parse(localStorage.getItem("notes")) || []
+  //   );
+  const [currentNoteId, setCurrentNoteId] = useState(notes[0]?.id || "");
+  // notes[0]?.id means (notes[0] && notes[0].id)
+
+  const currentNote =
+    notes.find((note) => note.id === currentNoteId) || notes[0];
+
+  //   use either this function or the variable above, but the function uses more resources
+  //   function findCurrentNote() {
+  //     return (
+  //       notes.find((note) => {
+  //         return note.id === currentNoteId;
+  //       }) || notes[0]
+  //     );
+  //   }
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(notesCollection, function (snapshot) {
+      const notesArr = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setNotes(notesArr);
+    });
+    return unsubscribe;
+  }, []);
+
+  //used if stored only in localStorage
+  //   useEffect(() => {
+  //     localStorage.setItem("notes", JSON.stringify(notes));
+  //   }, [notes]);
+
+  async function createNewNote() {
+    //used if stored only in localStorage
+    // id: nanoid(),
     const newNote = {
-      id: nanoid(),
       body: "# Type your markdown note's title here",
     };
-    setNotes((prevNotes) => [newNote, ...prevNotes]);
-    setCurrentNoteId(newNote.id);
+    const newNoteRef = await addDoc(notesCollection, newNote)
+    //used if stored only in localStorage
+    // setNotes((prevNotes) => [newNote, ...prevNotes]);
+    setCurrentNoteId(newNoteRef.id);
   }
 
+  // Puts recently modified Note at the top in Sidebar
   function updateNote(text) {
-    setNotes((oldNotes) =>
-      oldNotes.map((oldNote) => {
-        return oldNote.id === currentNoteId
-          ? { ...oldNote, body: text }
-          : oldNote;
-      })
-    );
+    setNotes((oldNotes) => {
+      const newArray = [];
+      for (let i = 0; i < oldNotes.length; i++) {
+        const oldNote = oldNotes[i];
+        if (oldNote.id === currentNoteId) {
+          newArray.unshift({ ...oldNote, body: text });
+        } else {
+          newArray.push(oldNote);
+        }
+      }
+      return newArray;
+    });
   }
 
-  function findCurrentNote() {
-    return (
-      notes.find((note) => {
-        return note.id === currentNoteId;
-      }) || notes[0]
-    );
+  // Notes holds same position in sidebar
+  //   function updateNote(text) {
+  //     setNotes((oldNotes) =>
+  //       oldNotes.map((oldNote) => {
+  //         return oldNote.id === currentNoteId
+  //           ? { ...oldNote, body: text }
+  //           : oldNote;
+  //       })
+  //     );
+  //   }
+
+  function deleteNote(event, noteId) {
+    event.stopPropagation();
+    setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
   }
 
   return (
@@ -44,12 +94,13 @@ export default function NoteApp() {
         <Split sizes={[30, 70]} direction="horizontal" className="split">
           <Sidebar
             notes={notes}
-            currentNote={findCurrentNote()}
+            currentNote={currentNote}
             setCurrentNoteId={setCurrentNoteId}
             newNote={createNewNote}
+            deleteNote={deleteNote}
           />
           {currentNoteId && notes.length > 0 && (
-            <Editor currentNote={findCurrentNote()} updateNote={updateNote} />
+            <Editor currentNote={currentNote} updateNote={updateNote} />
           )}
         </Split>
       ) : (

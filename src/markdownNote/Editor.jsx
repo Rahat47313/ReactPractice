@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import ReactMde from "react-mde";
-import 'react-mde/lib/styles/css/react-mde-all.css';
 import Showdown from "showdown";
 
 export default function Editor({ currentNote, updateNote }) {
@@ -31,6 +30,6 @@ export default function Editor({ currentNote, updateNote }) {
 }
 
 Editor.propTypes = {
-  currentNote: PropTypes.func,
+  currentNote: PropTypes.object,
   updateNote: PropTypes.func,
 };
