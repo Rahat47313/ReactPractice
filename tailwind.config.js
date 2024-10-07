@@ -28,6 +28,7 @@ export default {
         'menlo': ['Menlo', 'sans-serif'],
         'impact': ['Impact', 'sans-serif'],
         'impacted': ['Impacted', 'sans-serif'],
+        'karla': ['Karla', 'sans-serif']
       }
     },
   },

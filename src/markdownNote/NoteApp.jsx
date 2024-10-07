@@ -64,12 +64,12 @@ export default function NoteApp() {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if(tempNoteText !== currentNote.body){
-        updateNote(tempNoteText)
+      if (tempNoteText !== currentNote.body) {
+        updateNote(tempNoteText);
       }
-    }, 2000)
-    return () => clearTimeout(timeoutId)
-  }, [tempNoteText])
+    }, 2000);
+    return () => clearTimeout(timeoutId);
+  }, [tempNoteText]);
 
   async function createNewNote() {
     //used if stored only in localStorage
