@@ -12,7 +12,7 @@ export default function Navbar({ toggleTheme }) {
               src="https://upload.wikimedia.org/wikipedia/en/7/73/Trollface.png"
               className="w-[50px] h-[50px]"
             />
-            <div className="text-[30px] font-bold">Meme Generator</div>
+            <div className="text-[30px] font-bold">Practice</div>
           </div>
           <ul className="flex gap-5 items-center text-white">
             <li>Home</li>
