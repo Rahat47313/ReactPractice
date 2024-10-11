@@ -2,7 +2,6 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 // import MainContent from "./components/MainContent";
 import Meme from "./memeGenerator/Meme";
-// import NoteApp from "./markdownNote/NoteApp";
 // import Notification from "./components/notification";
 // import PricingCard from "./components/PricingCard";
 // import MobileNav from "./workComponents/MobileNav";
@@ -22,7 +21,6 @@ function App() {
       <Navbar toggleTheme={toggleTheme} />
       {/* <MainContent /> */}
       <Meme />
-      {/* <NoteApp /> */}
       {/* <Notification /> */}
       {/* <PricingCard /> */}
       {/* <Nav3 /> */}
